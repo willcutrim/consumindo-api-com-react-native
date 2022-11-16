@@ -2,7 +2,8 @@ import styled from "styled-components/native";
 
 
 export const Container = styled.View`
-    background: #87CEFA;
+    
+    background-color: #323238;
     width: 100%;
     height: 50px;
     justify-content: center;
@@ -12,18 +13,18 @@ export const Container = styled.View`
     border-radius: 6px;
 
     flex-direction: row;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
 `;
 
 
 export const Text = styled.Text`
     flex:1;
     font-size: 18px;
-    color: #1C1C1C;
+    color: #FFFFFF;
 `;
 
 
 export const Text2 = styled.Text`
     font-size: 18px;
-    color: #1C1C1C;
+    color: #FFFFFF;
 `;

@@ -1,11 +1,8 @@
-import { Home } from '@screens/Home';
-import { StatusBar } from 'react-native';
-
+import { AppRoutes } from './src/routes/app.routes';
 
 export default function App() {
   return (
-    <Home/>
-    
+      <AppRoutes/>
   );
 }
 
