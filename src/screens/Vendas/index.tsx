@@ -6,7 +6,9 @@ import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { useState } from 'react';
 
-const baseUrl = 'https://w-vendas.herokuapp.com/api/carrinho/';
+const baseUrl = 'http://10.0.2.2:8000/api/carrinho/';
+
+// const baseUrl = 'https://w-vendas.herokuapp.com/api/carrinho/';
 
 export function Vendas() {
 
@@ -14,12 +16,12 @@ export function Vendas() {
     const navigation = useNavigation();
     
     async function postCaixa() {
-        navigation.navigate('Vendas');
+        
         try {
            await axios.post(baseUrl, {
-                valor_da_compra: 65,
-                quantidade: 2,
-                produtos: [1,2]
+                valor_da_compra: 34,
+                quantidade: 3,
+                produtos: [1,2,3]
             }).then((response) => {
                 setProdutos(response.data);
                 navigation.goBack(); 

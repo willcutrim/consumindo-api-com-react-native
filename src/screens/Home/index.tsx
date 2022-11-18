@@ -9,38 +9,24 @@ import { Button } from '@components/Button';
 import { useNavigation } from '@react-navigation/native';
 
 
-const baseUrl = 'https://w-vendas.herokuapp.com/api/carrinho/';
+const baseUrl = 'http://10.0.2.2:8000/api/carrinho/';
+// const baseUrl = 'https://w-vendas.herokuapp.com/api/carrinho/';
+
 
 
 export function Home(){
 
     const [produtos, setProdutos] = useState();
-    
+
     const navigation = useNavigation();
-
-    async function postCaixa() {
-        navigation.navigate('Vendas');
-        // try {
-        //    await axios.post(baseUrl, {
-        //         valor_da_compra: 5,
-        //         quantidade: 2,
-        //         produtos: [1,2]
-        //     }).then((response) => {
-        //         setProdutos(response.data);
-        //         console.log('tudo certo');
-        //     });
-        // } catch (error) {
-        //     return 'deu merda';
-        // }
-    }
-
+    
     async function fetchProdutos(){
         
         try {
-            await axios.get(baseUrl).then((response) => {
+            const res = await axios.get(baseUrl).then((response) => {
                 setProdutos(response.data);
             });
-               
+            return res;
         } catch (error) {
             console.log(error);
         }
@@ -59,7 +45,7 @@ export function Home(){
                 keyExtractor={item => item.id}
                 renderItem={({ item }) => (
                     <CardProduto
-                        produto={'Qt: ' + item.quantidade}
+                        produto={'produtos: ' + item.quantidade}
                         valor={'valor: '+ item.valor_da_compra}
                     />
                 )}
@@ -72,7 +58,7 @@ export function Home(){
             />
             
             <Button
-                addPost={postCaixa}
+                addPost={() => navigation.navigate('Vendas')}
                 title='fazer um post'
             />
         </Container>
