@@ -1,12 +1,13 @@
 
 import { Container } from './styles';
 import { CardProduto } from '@components/CardProduto';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback  } from 'react';
 import { FlatList } from 'react-native';
-import { Text } from 'react-native';
 import axios from "axios";
 import { Button } from '@components/Button';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { ListaVazia } from '@components/EmptyList';
+
 
 
 const baseUrl = 'http://10.0.2.2:8000/api/carrinho/';
@@ -16,6 +17,7 @@ const baseUrl = 'http://10.0.2.2:8000/api/carrinho/';
 
 export function Home(){
 
+    
     const [produtos, setProdutos] = useState();
 
     const navigation = useNavigation();
@@ -23,17 +25,16 @@ export function Home(){
     async function fetchProdutos(){
         
         try {
-            const res = await axios.get(baseUrl).then((response) => {
+            await axios.get(baseUrl).then((response) => {  
                 setProdutos(response.data);
             });
-            return res;
         } catch (error) {
             console.log(error);
         }
     }
-    useEffect(() =>{
+    useFocusEffect(useCallback(() => {
         fetchProdutos();
-    }, []);
+      },[]));
 
     if (!produtos) return null;
 
@@ -48,11 +49,10 @@ export function Home(){
                         produto={'produtos: ' + item.quantidade}
                         valor={'valor: '+ item.valor_da_compra}
                     />
+                    
                 )}
                 ListEmptyComponent={() => (
-                    <Text>
-                        Vazio...
-                    </Text>
+                    <ListaVazia/>
                   )}
                   scrollEnabled
             />
